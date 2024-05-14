@@ -8,14 +8,12 @@ import { UserButton } from "@clerk/nextjs";
 const MarketingHeader = () => {
   const { userId, getToken } = auth();
 
-  console.log(userId, getToken);
-
   return (
     <>
       <header className="p-3 flex flex-row justify-between items-center">
         <h1 className="flex space-x-3">
           <LeafyGreen className="text-green-500 h-8 w-8" />{" "}
-          <span className="text-2xl">Nutritrack</span>
+          <span className="text-2xl">Nutritrack-app</span>
         </h1>
         <nav className="">
           {userId === null && (

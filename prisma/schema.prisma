@@ -14,32 +14,34 @@ datasource db {
 }
 
 model Seeder {
-  id String @id @default(cuid())
+  id String @id @default(uuid())
   name String
   description String
   isDone Boolean @default(false)
 }
 
 model User {
-  id        String   @id @default(cuid())
+  id        String   @id @default(uuid())
   authId    String   @unique
+  userNameNutritrack String
+  showPublicDiet Boolean @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model MealType {
-  idMealType String  @id @default(cuid())
+  idMealType String  @id @default(uuid())
   name String
 }
 
 model Ingredient {
-  idIngredient String  @id @default(cuid())
+  idIngredient String  @id @default(uuid())
   name String
   description String
 }
 
 model QuantityUnit {
-  idQuantityUnit String  @id @default(cuid())
+  idQuantityUnit String  @id @default(uuid())
   name String
   quantity Decimal
 }

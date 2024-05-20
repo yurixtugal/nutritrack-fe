@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 
 const Setup =  async () => {
   const currentUser = await initProfile();
-  console.log(currentUser)
+
   if (currentUser) {
     return redirect("/dashboard");
   }

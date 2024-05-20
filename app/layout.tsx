@@ -5,6 +5,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import NutritrackHeader from "@/lib/ui/nutritrack-header";
 import NutritrackFooter from "@/lib/ui/nutritrack-footer";
+import { getCurrentProfile } from "@/lib/authLib";
+import { redirect } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,16 +20,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <ClerkProvider>
       <html lang="en">
         <body className={inter.className}>
           <div className="min-h-screen flex flex-col">
-            <NutritrackHeader />
+            
             <main className="flex-1 flex flex-col">
               {children}
             </main>
-            <NutritrackFooter />
+            
           </div>
         </body>
       </html>

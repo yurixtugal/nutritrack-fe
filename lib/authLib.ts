@@ -23,6 +23,8 @@ export const initProfile = async () => {
       data: {
         id: uuidv4(),
         authId: userId,
+        userNameNutritrack: "",
+        showPublicDiet: false,
       },
     });
   }

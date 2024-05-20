@@ -1,10 +1,12 @@
 import { UserButton } from "@clerk/nextjs";
+import { getCurrentProfile } from "@/lib/authLib"; 
+
 
 const DashBoard = () => {
+  const userId = getCurrentProfile();
   return (
     <div>
-      <h1>Nutritrack APP</h1>
-      <UserButton />
+      <h1>DashBoard app</h1>
     </div>
   )
 }

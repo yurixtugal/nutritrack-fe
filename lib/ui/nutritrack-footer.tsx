@@ -1,7 +1,7 @@
 import { LeafyGreen } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
-const MarketingFooter = () => {
+const NutritrackFooter = () => {
   return (
   <>
   <Separator className="bg-green-500 h-[0.5px]" />
@@ -13,4 +13,4 @@ const MarketingFooter = () => {
 );
 }
  
-export default MarketingFooter;
+export default NutritrackFooter;

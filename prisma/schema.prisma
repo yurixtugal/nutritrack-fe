@@ -32,6 +32,7 @@ model User {
 model MealType {
   idMealType String  @id @default(uuid())
   name String
+  meals Meal[]
 }
 
 model Ingredient {
@@ -44,4 +45,14 @@ model QuantityUnit {
   idQuantityUnit String  @id @default(uuid())
   name String
   quantity Decimal
+}
+
+model Meal {
+  idMeal String  @id @default(uuid())
+  name String
+  description String
+  pictureUrl String
+  mealTypeId String
+  mealType MealType @relation(fields: [mealTypeId], references: [idMealType])
+  dateMeal DateTime @db.Date
 }

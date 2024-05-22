@@ -41,12 +41,29 @@ model Ingredient {
   idIngredient String  @id @default(uuid())
   name String
   description String
+
+  ingredientCalories IngredientCalories[]
+}
+
+model IngredientCalories {
+  idIngredientCalories String  @id @default(uuid())
+  idIngredient String
+  ingredient Ingredient @relation(fields: [idIngredient], references: [idIngredient])
+  calories Decimal
+  idQuantityUnit String
+  quantityIngredient Decimal // should be used to calculate the calories with grams or ml or other not for cups or spoons
+  
+  quantityUnit QuantityUnit @relation(fields: [idQuantityUnit], references: [idQuantityUnit])
+
 }
 
 model QuantityUnit {
   idQuantityUnit String  @id @default(uuid())
   name String
-  quantity Decimal
+  quantity Decimal 
+  shortName String @default("g")
+
+  ingredientCalories IngredientCalories[]
 }
 
 model Meal {

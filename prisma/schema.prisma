@@ -27,6 +27,8 @@ model User {
   showPublicDiet Boolean @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  
+  meals Meal[]
 }
 
 model MealType {
@@ -55,4 +57,6 @@ model Meal {
   mealTypeId String
   mealType MealType @relation(fields: [mealTypeId], references: [idMealType])
   dateMeal DateTime @db.Date
+  userId String
+  user User @relation(fields: [userId], references: [id])
 }

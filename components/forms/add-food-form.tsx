@@ -11,6 +11,8 @@ import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { Textarea } from "@/components/ui/textarea";
+import { useState, useTransition } from "react";
+
 
 import {
   Card,
@@ -42,6 +44,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { registerFood } from "@/actions/food-action";
+import { FoodSchema } from "@/schemas";
+import { toast } from "../ui/use-toast";
+import { ToastAction } from "../ui/toast";
 
 interface comboType {
   label: string;
@@ -52,25 +58,11 @@ interface FoodFormProps {
   lstMealType: comboType[];
 }
 
-const FoodSchema = z.object({
-  name: z.string().min(1, {
-    message: "Please enter a food name.",
-  }),
-  mealType: z
-    .string({
-      required_error: "Please select a meal type.",
-    })
-    .min(1, {
-      message: "Please select a meal type.",
-    }),
-  dateMeal: z.date({
-    required_error: "Please select a date.",
-  }),
-  description: z.string().optional(),
-});
-
 
 const AddFoodForm = ({ lstMealType }: FoodFormProps) => {
+  const [isPending, startTransition] = useTransition();
+  const [success, setSuccess] = useState< string | undefined >("");
+  const [error, setError] = useState< string | undefined >("");
   const form = useForm<z.infer<typeof FoodSchema>>({
     resolver: zodResolver(FoodSchema),
     defaultValues: {
@@ -82,7 +74,25 @@ const AddFoodForm = ({ lstMealType }: FoodFormProps) => {
   });
 
   const onSubmit = async (data: z.infer<typeof FoodSchema>) => {
-    console.log(data);
+    startTransition(() => {
+      registerFood(data).then((data) => {
+        if (data.error){
+          toast({
+            variant: "destructive",
+            title: "Uh oh! Something went wrong.",
+            description: "There was a problem with your request.",
+            action: <ToastAction altText="Try again">Try again</ToastAction>,
+          })
+        } else {
+          toast({
+            title: "Success!",
+            description: "Food registered successfully.",
+          })
+          
+        }
+      });
+       
+    });
   };
 
   return (

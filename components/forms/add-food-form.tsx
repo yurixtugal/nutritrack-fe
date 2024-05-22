@@ -12,7 +12,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { Textarea } from "@/components/ui/textarea";
 import { useState, useTransition } from "react";
-
+import { useRouter } from "next/navigation";
 
 import {
   Card,
@@ -60,6 +60,7 @@ interface FoodFormProps {
 
 
 const AddFoodForm = ({ lstMealType }: FoodFormProps) => {
+  let router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [success, setSuccess] = useState< string | undefined >("");
   const [error, setError] = useState< string | undefined >("");
@@ -88,7 +89,7 @@ const AddFoodForm = ({ lstMealType }: FoodFormProps) => {
             title: "Success!",
             description: "Food registered successfully.",
           })
-          
+          router.push(`/addMeal/Ingredients/${data.data?.idMeal}`)
         }
       });
        

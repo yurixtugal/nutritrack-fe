@@ -1,6 +1,5 @@
 "use client"
 import { Button } from "@/components/ui/button";
-import { getCurrentProfile } from "@/lib/authLib";
 import { useAuth } from "@clerk/nextjs";
 import Link from "next/link";
 
@@ -14,7 +13,7 @@ const DashBoard =  () => {
         <h2>Your user id is: {userId}</h2>
       </div>
       <Button asChild >
-      <Link href="/addFood"> Add Food </Link>
+      <Link href="/addMeal/GeneralInformation"> Add Meal </Link>
       </Button>
     </div>
   );

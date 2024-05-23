@@ -20,7 +20,8 @@ const SheetIngredient = () => {
   return (
       <Sheet>
       <SheetTrigger asChild>
-        <Button variant="secondary" className="w-1/12">Open</Button>
+        <div><Button  className="w-1/6 hidden lg:block">Add ingredient</Button>
+        <Button  className="w-1/3 lg:hidden">Add ingredient</Button></div>
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>

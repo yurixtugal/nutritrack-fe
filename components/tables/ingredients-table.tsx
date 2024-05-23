@@ -48,6 +48,7 @@ interface IngredientStructure {
 
 interface IngredientsTableProps {
   ingredients: IngredientStructure[];
+
 }
 
 const IngredientsTable = ({ ingredients }: IngredientsTableProps) => {

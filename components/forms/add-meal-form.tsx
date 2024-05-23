@@ -59,7 +59,7 @@ interface FoodFormProps {
 }
 
 
-const AddFoodForm = ({ lstMealType }: FoodFormProps) => {
+const AddGeneralInformationMealForm = ({ lstMealType }: FoodFormProps) => {
   let router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [success, setSuccess] = useState< string | undefined >("");
@@ -261,4 +261,4 @@ const AddFoodForm = ({ lstMealType }: FoodFormProps) => {
   );
 };
 
-export { AddFoodForm };
+export { AddGeneralInformationMealForm };

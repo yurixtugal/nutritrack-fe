@@ -1,7 +1,7 @@
-import { AddFoodForm } from "@/components/forms/add-food-form";
+import { AddGeneralInformationMealForm } from "@/components/forms/add-meal-form";
 import { db } from "@/lib/db";
 
-const AddFood = async () => {
+const Addmeal = async () => {
 
   const mealType = await db.mealType.findMany();
 
@@ -14,9 +14,9 @@ const AddFood = async () => {
 
   return (
     <>
-      <AddFoodForm lstMealType={propMealType} />
+      <AddGeneralInformationMealForm lstMealType={propMealType} />
     </>
   );
 };
 
-export default AddFood;
+export default Addmeal;

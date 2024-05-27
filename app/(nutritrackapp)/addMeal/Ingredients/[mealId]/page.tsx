@@ -24,6 +24,12 @@ const Addingredients = async ({ params }: IngredientsPageProps) => {
     },
     include: {
       mealType: true,
+      mealIngredients: {
+        include: {
+           ingredient: true,
+           quantityUnit: true
+        }
+      },
     },
   });
 
@@ -37,13 +43,22 @@ const Addingredients = async ({ params }: IngredientsPageProps) => {
     }).format(date);
   };
 
+  const ingredientsTable = meal.mealIngredients?(
+    meal.mealIngredients.map( (mi) => ({
+      idIngredientTable: mi.idMealIngredient,
+      ingredient: mi.ingredient.name,
+      quantity: mi.quantity.toNumber(),
+      quantityUnit: mi.quantityUnit.name
+    }))
+  ):[]
+
   return (
     <>
       <div className="grid space-y-10">
         <h1 className="lg:text-2xl text-xl text-center ">
           {formatDate(meal.dateMeal)} - {meal.mealType.name} - {meal.name}
         </h1>
-        <IngredientsTable ingredients={ingredients} />
+        <IngredientsTable ingredients={ingredients} mealId={params.mealId} ingredientsTable={ingredientsTable} />
       </div>
     </>
   );

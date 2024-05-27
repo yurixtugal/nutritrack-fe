@@ -26,6 +26,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "../ui/button";
 import { SheetIngredient } from "./sheet-ingredient";
+import { DialogIngredient } from "./dialog-ingredient";
 
 interface IngredientStructure {
   idIngredient: string;
@@ -46,18 +47,25 @@ interface IngredientStructure {
   }[];
 }
 
+
+
 interface IngredientsTableProps {
   ingredients: IngredientStructure[];
-
+  mealId: string;
+  
+  ingredientsTable: {
+    idIngredientTable: string,
+    ingredient: string,
+    quantity: number,
+    quantityUnit: string
+  }[]
 }
 
-const IngredientsTable = ({ ingredients }: IngredientsTableProps) => {
-  const showLayout = () => {
-    console.log("Show layout");
-  };
+const IngredientsTable = ({ ingredients, mealId, ingredientsTable }: IngredientsTableProps) => {
+  console.log(ingredientsTable)
   return (
     <><div className="grid space-y-10 justify-normal">
-      <SheetIngredient />
+      <DialogIngredient ingredients={ingredients} mealId={mealId} />
       <Table>
         <TableCaption>A list of your ingridients</TableCaption>
         <TableHeader>
@@ -69,12 +77,15 @@ const IngredientsTable = ({ ingredients }: IngredientsTableProps) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow>
-            <TableCell>Pinapple</TableCell>
-            <TableCell>1 cup</TableCell>
-            <TableCell>2</TableCell>
-            <TableCell className="text-right"> 100 </TableCell>
-          </TableRow>
+        { ingredientsTable.map ((it) => 
+        <TableRow key={it.idIngredientTable}>
+        <TableCell>{it.ingredient}</TableCell>
+        <TableCell>{it.quantityUnit}</TableCell>
+        <TableCell>{it.quantity}</TableCell>
+        <TableCell className="text-right"> 100 </TableCell>
+      </TableRow>
+        )}
+          
         </TableBody>
         <TableFooter>
         <TableRow>

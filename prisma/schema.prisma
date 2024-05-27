@@ -43,6 +43,7 @@ model Ingredient {
   description String
 
   ingredientCalories IngredientCalories[]
+  mealIngredients MealIngredient[]
 }
 
 model IngredientCalories {
@@ -64,6 +65,7 @@ model QuantityUnit {
   shortName String @default("g")
 
   ingredientCalories IngredientCalories[]
+  mealIngredients MealIngredient[]
 }
 
 model Meal {
@@ -76,4 +78,16 @@ model Meal {
   dateMeal DateTime @db.Date
   userId String
   user User @relation(fields: [userId], references: [id])
+  mealIngredients MealIngredient[]
+}
+
+model MealIngredient {
+  idMealIngredient String  @id @default(uuid())
+  idMeal String
+  meal Meal @relation(fields: [idMeal], references: [idMeal])
+  idIngredient String
+  ingredient Ingredient @relation(fields: [idIngredient], references: [idIngredient])
+  idQuantityUnit String
+  quantity Decimal
+  quantityUnit QuantityUnit @relation(fields: [idQuantityUnit], references: [idQuantityUnit])
 }

@@ -15,15 +15,45 @@ const linksHeaders = [
 
 const NutritrackHeader = () => {
   const { userId } = auth();
-
+  
   return (
     <>
       <header className="p-3 flex flex-row justify-between items-center">
-        
-          <h1 className="flex space-x-3">
-            <LeafyGreen className="text-green-500 h-8 w-8" />{" "}
-            <span className="text-2xl">Nutritrack-app</span>
-          </h1>
+        <div className="flex items-center gap-4">
+          <Link
+            href="/dashboard"
+            className="flex items-center gap-2 font-semibold"
+            prefetch={false}
+          >
+            <h1 className="flex space-x-3">
+              <LeafyGreen className="text-green-500 h-8 w-8" />{" "}
+              <span className="text-2xl">Nutritrack-app</span>
+            </h1>
+          </Link>
+          {userId !== null && (
+            <nav className="hidden sm:flex items-center gap-4 pt-[10px]">
+              
+              <Link
+                href="/dashboard"
+                className="hover:underline"
+                prefetch={false}
+              >
+                Dashboard
+              </Link>
+              <Link href="/meals" className="hover:underline" prefetch={false}>
+                List Meals
+              </Link>
+              <Link
+                href="/addMeal/GeneralInformation"
+                className="hover:underline"
+                prefetch={false}
+              >
+                Add Meal
+              </Link>
+            </nav>
+          )}
+        </div>
+
         <nav className="">
           {userId === null && (
             <ul className="flex space-x-3">

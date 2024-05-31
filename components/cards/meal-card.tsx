@@ -34,9 +34,6 @@ const MealCard = ({ meal }: MealCardProps) => {
             ))}
           </ul>
         </CardContent>
-        <CardFooter>
-          <Button variant="outline">View Diet</Button>
-        </CardFooter>
       </Card>
     </div>
   );

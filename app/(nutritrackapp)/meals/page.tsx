@@ -38,10 +38,18 @@ const MealList = async () => {
       // Convertir Decimal a number
     })),
   }));
-  console.log(serializedMeals);
+  
   return (
     <main className="flex-1 p-4 md:p-8">
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        
+        {serializedMeals.length === 0 && (
+          <div className=" text-gray-500">
+            No meals found, add a meal to get started
+          </div>
+        
+        )}
+        
         {serializedMeals.map((x) => (
           <MealCard key={x.idMeal} meal={x} />
         ))}

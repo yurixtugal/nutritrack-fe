@@ -11,21 +11,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet"
-
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Button } from "../ui/button";
-import { SheetIngredient } from "./sheet-ingredient";
 import { DialogIngredient } from "./dialog-ingredient";
 
 interface IngredientStructure {
@@ -57,12 +42,15 @@ interface IngredientsTableProps {
     idIngredientTable: string,
     ingredient: string,
     quantity: number,
-    quantityUnit: string
+    quantityUnit: string,
+    totalCalories: number
   }[]
 }
 
 const IngredientsTable = ({ ingredients, mealId, ingredientsTable }: IngredientsTableProps) => {
-  console.log(ingredientsTable)
+  
+  const totalCalories = ingredientsTable.reduce((acc, it) => acc + it.totalCalories, 0);
+
   return (
     <><div className="grid space-y-10 justify-normal">
       <DialogIngredient ingredients={ingredients} mealId={mealId} />
@@ -73,7 +61,7 @@ const IngredientsTable = ({ ingredients, mealId, ingredientsTable }: Ingredients
             <TableHead>Ingredient</TableHead>
             <TableHead>Quantity Unit</TableHead>
             <TableHead>Quantity</TableHead>
-            <TableHead>Calories</TableHead>
+            <TableHead>Calories (kcal)</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -82,7 +70,7 @@ const IngredientsTable = ({ ingredients, mealId, ingredientsTable }: Ingredients
         <TableCell>{it.ingredient}</TableCell>
         <TableCell>{it.quantityUnit}</TableCell>
         <TableCell>{it.quantity}</TableCell>
-        <TableCell className="text-right"> 100 </TableCell>
+        <TableCell className="text-right"> {it.totalCalories} </TableCell>
       </TableRow>
         )}
           
@@ -90,7 +78,7 @@ const IngredientsTable = ({ ingredients, mealId, ingredientsTable }: Ingredients
         <TableFooter>
         <TableRow>
           <TableCell colSpan={3}>Total Calories</TableCell>
-          <TableCell className="text-right"> 100 </TableCell>
+          <TableCell className="text-right"> {totalCalories} </TableCell>
         </TableRow>
       </TableFooter>
       </Table></div>

@@ -8,6 +8,7 @@ export interface MealProps {
   userId: string;
   mealType: MealTypeProps;
   mealIngredients: MealIngredientProps[];
+  totalCalories: number;
 }
 
 export interface MealTypeProps {
@@ -36,4 +37,33 @@ export interface QuantityUnit {
   name: string;
   quantity: number;
   shortName: string;
+}
+
+export interface IngredientCalories {
+  idIngredientCalories: string;
+  idIngredient: string;
+  calories: number;
+  idQuantityUnit: string;
+  quantityIngredient: number;
+  quantityUnit: QuantityUnit;
+}
+
+export interface MealIngredientCalculationProps {
+  idMealIngredient: string,
+  idMeal: string,
+  idIngredient: string,
+  idQuantityUnit: string,
+  quantity: number,
+  ingredient: {
+    idIngredient:  string,
+    name:  string,
+    description:  string,
+    ingredientCalories: any[]
+  },
+  quantityUnit: {
+    idQuantityUnit:  string,
+    name:  string,
+    quantity: number,
+    shortName: string
+  }
 }

@@ -33,6 +33,10 @@ const MealCard = ({ meal }: MealCardProps) => {
             </li>
             ))}
           </ul>
+
+          <div className="flex items-center justify-between mt-4">
+            <span className="text-sm font-medium">Calories: {meal.totalCalories} kcal</span>
+          </div>
         </CardContent>
       </Card>
     </div>

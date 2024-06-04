@@ -26,9 +26,9 @@ const Addingredients = async ({ params }: IngredientsPageProps) => {
       mealType: true,
       mealIngredients: {
         include: {
-           ingredient: true,
-           quantityUnit: true
-        }
+          ingredient: true,
+          quantityUnit: true,
+        },
       },
     },
   });
@@ -43,22 +43,57 @@ const Addingredients = async ({ params }: IngredientsPageProps) => {
     }).format(date);
   };
 
-  const ingredientsTable = meal.mealIngredients?(
-    meal.mealIngredients.map( (mi) => ({
-      idIngredientTable: mi.idMealIngredient,
-      ingredient: mi.ingredient.name,
-      quantity: mi.quantity.toNumber(),
-      quantityUnit: mi.quantityUnit.name
-    }))
-  ):[]
+  const ingredientsTable = meal.mealIngredients
+    ? meal.mealIngredients.map((mi) => {
+      const ingredient = ingredients.find((i) => i.idIngredient === mi.ingredient.idIngredient);
 
+      if (!ingredient) return {
+        idIngredientTable: mi.idMealIngredient,
+        ingredient: mi.ingredient.name,
+        quantity: mi.quantity.toNumber(),
+        quantityUnit: mi.quantityUnit.name,
+        totalCalories: 0,      
+      };
+
+      const quantityUnitId = mi.quantityUnit.idQuantityUnit;
+
+      const ingredientCalories = ingredient.ingredientCalories.find(
+        (ic) => ic.idQuantityUnit === quantityUnitId
+      );
+
+      if (!ingredientCalories) return {
+        idIngredientTable: mi.idMealIngredient,
+        ingredient: mi.ingredient.name,
+        quantity: mi.quantity.toNumber(),
+        quantityUnit: mi.quantityUnit.name,
+        totalCalories: 0,      
+      };
+
+      const totalCalories = ingredientCalories.calories.toNumber() * (mi.quantity.toNumber()/ingredientCalories.quantityIngredient.toNumber());
+      
+      
+        return {
+          idIngredientTable: mi.idMealIngredient,
+          ingredient: mi.ingredient.name,
+          quantity: mi.quantity.toNumber(),
+          quantityUnit: mi.quantityUnit.name,
+          totalCalories: totalCalories,
+        };
+      })
+    : [];
+
+    console.log(ingredientsTable)
   return (
     <>
       <div className="grid space-y-10">
         <h1 className="lg:text-2xl text-xl text-center ">
           {formatDate(meal.dateMeal)} - {meal.mealType.name} - {meal.name}
         </h1>
-        <IngredientsTable ingredients={ingredients} mealId={params.mealId} ingredientsTable={ingredientsTable} />
+        <IngredientsTable
+          ingredients={ingredients}
+          mealId={params.mealId}
+          ingredientsTable={ingredientsTable}
+        />
       </div>
     </>
   );

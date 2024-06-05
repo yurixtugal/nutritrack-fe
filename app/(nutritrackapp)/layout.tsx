@@ -8,6 +8,9 @@ type Props = {
 const MarketingLayout = ({ children }: Props) => {
   return (
     <div className="min-h-screen flex flex-col">
+      <div className="hidden md:flex"></div> {/* This is a fix to let the header works with responsive md:flex
+      TODO: Find a better way to fix this because in NutritrackHeader we are using md:flex and with this fix it will not work
+      */}
       <NutritrackHeader />
       <main className="flex-1 flex flex-col p-3">
         {children}

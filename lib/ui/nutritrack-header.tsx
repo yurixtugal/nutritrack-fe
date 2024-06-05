@@ -31,7 +31,7 @@ const NutritrackHeader = () => {
             </h1>
           </Link>
           {userId !== null && (
-            <nav className="flex items-center gap-4 pt-[10px]">
+            <nav className="hidden md:flex items-center gap-4 pt-[10px]">
               
               <Link
                 href="/dashboard"
